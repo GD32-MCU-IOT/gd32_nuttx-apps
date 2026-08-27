@@ -1,0 +1,39 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config EXAMPLES_CUSTOM_HID
+	tristate "USB Custom HID example"
+	default n
+	depends on CUSTOM_HID
+	---help---
+		Enable the USB Custom HID example.  This application opens the
+		/dev/hidN character device exported by the Custom HID device class
+		driver and demonstrates bidirectional HID report exchange with a
+		host application.
+
+if EXAMPLES_CUSTOM_HID
+
+config EXAMPLES_CUSTOM_HID_DEVPATH
+	string "Custom HID device path"
+	default "/dev/hid0"
+	---help---
+		The path to the Custom HID character device.
+
+config EXAMPLES_CUSTOM_HID_PROGNAME
+	string "Program name"
+	default "custom_hid"
+	---help---
+		This is the name of the program that will be used when the NSH ELF
+		program is installed.
+
+config EXAMPLES_CUSTOM_HID_PRIORITY
+	int "Custom HID task priority"
+	default 100
+
+config EXAMPLES_CUSTOM_HID_STACKSIZE
+	int "Custom HID stack size"
+	default DEFAULT_TASK_STACKSIZE
+
+endif
